@@ -2,8 +2,10 @@ import UIKit
 
 class StoreListViewController: UIViewController {
 
+    // INCLUIR ORDENAR E FILTRO
+    // INCLUIR PESQUISA
+    
     private var viewModel: StoreListViewModelProtocol
-    var quantasvezes: Int = 0
     
     private lazy var storeTypeLabel: UILabel = {
         let label = UILabel()
@@ -15,14 +17,22 @@ class StoreListViewController: UIViewController {
     private lazy var bannersCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+        layout.sectionInset = UIEdgeInsets(top: 2, left: 16, bottom: 2, right: 16)
+        let width = UIScreen.main.bounds.width
+        layout.itemSize = CGSize(width: width - 64, height: 200)
+        layout.minimumLineSpacing = 32
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.isPagingEnabled = true
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
     
     private lazy var storeListTableView: UITableView = {
         let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -38,15 +48,18 @@ class StoreListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .systemBackground
         addSubviews()
         setupConstraints()
+        
+        storeListTableView.register(StoreTableViewCell.self, forCellReuseIdentifier: StoreTableViewCell.identifier)
+        bannersCollectionView.register(BannerCollectionViewCell.self, forCellWithReuseIdentifier: BannerCollectionViewCell.identifier)
+        
         storeTypeLabel.text = viewModel.getStoreType()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print(quantasvezes)
-        quantasvezes += 1
         viewModel.printStoreType()
     }
     
@@ -74,7 +87,8 @@ class StoreListViewController: UIViewController {
         NSLayoutConstraint.activate([
             bannersCollectionView.topAnchor.constraint(equalTo: storeTypeLabel.bottomAnchor, constant: 16),
             bannersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            bannersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+            bannersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            bannersCollectionView.heightAnchor.constraint(equalToConstant: 100)
         ])
     }
     
