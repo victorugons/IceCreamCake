@@ -19,19 +19,19 @@ final class AppCoordinator: Coordinator {
         
         salgadosCoordinator.rootViewController.tabBarItem = UITabBarItem(
             title: "Salgados",
-            image: UIImage(named: ""),
+            image: UIImage(systemName: "flame"),
             tag: 0
         )
         
         docesCoordinator.rootViewController.tabBarItem = UITabBarItem(
             title: "Doces",
-            image: UIImage(named: ""),
+            image: UIImage(systemName: "record.circle.fill"),
             tag: 1
         )
         
         bebidasCoordinator.rootViewController.tabBarItem = UITabBarItem(
             title: "Bebidas",
-            image: UIImage(named: ""),
+            image: UIImage(systemName: "drop"),
             tag: 2
         )
         
