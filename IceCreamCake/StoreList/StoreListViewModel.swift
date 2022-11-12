@@ -1,7 +1,7 @@
 import UIKit
 
 class StoreListViewModel: StoreListViewModelProtocol {
-    private let service: StoreListService
+    private let service: StoreListServiceProtocol
     
     var storeType: StoreType
     var storeList: [Store] = []
