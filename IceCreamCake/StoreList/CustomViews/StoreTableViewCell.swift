@@ -15,7 +15,7 @@ class StoreTableViewCell: UITableViewCell {
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "TESTEEEEEEEEEEEEEEEEEEEEEEEE"
+        label.text = ""
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -23,7 +23,7 @@ class StoreTableViewCell: UITableViewCell {
     
     private lazy var categoryLabel: UILabel = {
         let label = UILabel()
-        label.text = "TESTANDOOOOOOOOOOOOOOOOOOOOO"
+        label.text = ""
         label.numberOfLines = 1
         label.font = UIFont.systemFont(ofSize: 12, weight: .light)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -64,7 +64,7 @@ class StoreTableViewCell: UITableViewCell {
     
     private lazy var ratingLabel: UILabel = {
         let label = UILabel()
-        label.text = "4.5"
+        label.text = "-"
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -96,7 +96,7 @@ class StoreTableViewCell: UITableViewCell {
        ])
         stackView.axis = .horizontal
         stackView.alignment = .center
-        stackView.spacing = 8
+        stackView.spacing = 12
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -121,6 +121,12 @@ class StoreTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupCell(with store: Store) {
+        nameLabel.text = store.name
+        categoryLabel.text = store.category
+        ratingLabel.text = store.rating
     }
     
     private func setupConstraints() {

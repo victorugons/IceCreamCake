@@ -1,4 +1,5 @@
 import UIKit
+import Kingfisher
 
 class BannerCollectionViewCell: UICollectionViewCell {
    
@@ -6,7 +7,9 @@ class BannerCollectionViewCell: UICollectionViewCell {
     
     private lazy var bannerImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "star.filled")
+        imageView.layer.masksToBounds = false
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 8
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -14,7 +17,6 @@ class BannerCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(bannerImageView)
-        contentView.backgroundColor = .yellow
         setupBannerImageView()
     }
     
@@ -22,7 +24,11 @@ class BannerCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupBannerImageView() {
+    func setupCell(with banner: Banner) {
+        bannerImageView.kf.setImage(with: URL(string: banner.url))
+    }
+    
+    private func setupBannerImageView() {
         NSLayoutConstraint.activate([
             bannerImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor),
             bannerImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
