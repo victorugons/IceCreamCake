@@ -2,9 +2,11 @@ import UIKit
 
 class StoreListViewModel: StoreListViewModelProtocol {
     private let service: StoreListServiceProtocol
+    private let coordinator: StoreListCoordinator
     
     var storeType: StoreType
     var storeList: [Store] = []
+    var favoritesList: [FavoriteStore] = []
     var banners: [Banner] = []
     
     func getStoreList(completion: @escaping () -> Void) {
@@ -31,9 +33,10 @@ class StoreListViewModel: StoreListViewModelProtocol {
         }
     }
     
-    init(service: StoreListService, storeType: StoreType) {
+    init(storeType: StoreType, service: StoreListService, coordinator: StoreListCoordinator) {
         self.service = service
         self.storeType = storeType
+        self.coordinator = coordinator
     }
     
     private func filterStoresByType(with storeList: [Store]) {
@@ -46,6 +49,10 @@ class StoreListViewModel: StoreListViewModelProtocol {
     
     func getStoreType() -> String {
         return storeType.name
+    }
+    
+    func search(for text: String) {
+        coordinator.goToSearchResults(for: text, with: storeList)
     }
 }
 

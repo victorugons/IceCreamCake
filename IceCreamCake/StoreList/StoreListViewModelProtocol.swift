@@ -8,4 +8,5 @@ protocol StoreListViewModelProtocol {
     func getStoreList(completion: @escaping () -> Void)
     func getBanners(completion: @escaping () -> Void)
     func getStoreType() -> String
+    func search(for text: String)
 }

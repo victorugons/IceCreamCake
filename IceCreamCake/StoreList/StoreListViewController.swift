@@ -1,11 +1,14 @@
 import UIKit
 
 class StoreListViewController: UIViewController {
-
-    // INCLUIR ORDENAR E FILTRO
-    // INCLUIR PESQUISA
     
     var viewModel: StoreListViewModelProtocol
+    
+    private lazy var searchController: UISearchController = {
+        let searchController = UISearchController()
+        searchController.searchBar.delegate = self
+        return searchController
+    }()
     
     private lazy var storeTypeLabel: UILabel = {
         let label = UILabel()
@@ -13,6 +16,50 @@ class StoreListViewController: UIViewController {
         label.text = viewModel.getStoreType()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    private lazy var favoritesToggleButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "heart"), for: .normal)
+        button.tintColor = .darkGray
+        button.addTarget(self, action: #selector(showFavorites), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var sortButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "arrow.up.arrow.down"), for: .normal)
+        button.tintColor = .darkGray
+        button.addTarget(self, action: #selector(showFavorites), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var filterButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "line.3.horizontal.decrease.circle"), for: .normal)
+        button.tintColor = .darkGray
+        button.addTarget(self, action: #selector(showFavorites), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var actionsStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [favoritesToggleButton, sortButton, filterButton])
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private lazy var headerStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [storeTypeLabel, actionsStackView])
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
     
     private lazy var bannersCollectionView: UICollectionView = {
@@ -48,6 +95,7 @@ class StoreListViewController: UIViewController {
         return tableView
     }()
     
+    //MARK: - Init
     init(viewModel: StoreListViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -57,15 +105,17 @@ class StoreListViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        navigationItem.searchController = searchController
         addSubviews()
         setupConstraints()
         customizeViews()
-        viewModel.getStoreList {
+        viewModel.getStoreList { [weak self] in
             DispatchQueue.main.async {
-                self.storeListTableView.reloadData()
+                self?.storeListTableView.reloadData()
             }
         }
         viewModel.getBanners { [weak self] in
@@ -81,30 +131,55 @@ class StoreListViewController: UIViewController {
     }
     
     private func addSubviews() {
-        view.addSubview(storeTypeLabel)
+        view.addSubview(headerStackView)
         view.addSubview(bannersCollectionView)
         view.addSubview(bannersPageControl)
         view.addSubview(storeListTableView)
     }
     
     private func setupConstraints() {
-        setupStoreTypeLabelConstraints()
+        setupFavoritesToggleButtonConstraints()
+        setupSortButtonConstraints()
+        setupFilterButtonConstraints()
+        setupHeaderStackViewConstraints()
         setupBannersCollectionViewConstraints()
         setupStoreListTableViewConstraints()
         setupBannersPageControlConstraints()
     }
-
-    private func setupStoreTypeLabelConstraints() {
+    
+    private func setupFavoritesToggleButtonConstraints() {
         NSLayoutConstraint.activate([
-            storeTypeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            storeTypeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            storeTypeLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+            favoritesToggleButton.heightAnchor.constraint(equalToConstant: 25),
+            favoritesToggleButton.widthAnchor.constraint(equalToConstant: 25)
+        ])
+    }
+    
+    private func setupSortButtonConstraints() {
+        NSLayoutConstraint.activate([
+            sortButton.heightAnchor.constraint(equalToConstant: 25),
+            sortButton.widthAnchor.constraint(equalToConstant: 25)
+        ])
+    }
+    
+    private func setupFilterButtonConstraints() {
+        NSLayoutConstraint.activate([
+            filterButton.heightAnchor.constraint(equalToConstant: 25),
+            filterButton.widthAnchor.constraint(equalToConstant: 25)
+        ])
+    }
+    
+    
+    private func setupHeaderStackViewConstraints() {
+        NSLayoutConstraint.activate([
+            headerStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            headerStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            headerStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
     }
     
     private func setupBannersCollectionViewConstraints() {
         NSLayoutConstraint.activate([
-            bannersCollectionView.topAnchor.constraint(equalTo: storeTypeLabel.bottomAnchor, constant: 16),
+            bannersCollectionView.topAnchor.constraint(equalTo: headerStackView.bottomAnchor, constant: 16),
             bannersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             bannersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             bannersCollectionView.heightAnchor.constraint(equalToConstant: 124)
@@ -139,5 +214,16 @@ class StoreListViewController: UIViewController {
             storeTypeLabel.textColor = #colorLiteral(red: 1, green: 0, blue: 0, alpha: 0.9508226407)
             bannersPageControl.currentPageIndicatorTintColor = #colorLiteral(red: 1, green: 0, blue: 0, alpha: 1)
         }
+    }
+    
+    @objc private func showFavorites() {
+        print("Teste Favoritos")
+    }
+}
+
+extension StoreListViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let searchText: String = searchBar.text ?? ""
+        viewModel.search(for: searchText)
     }
 }
