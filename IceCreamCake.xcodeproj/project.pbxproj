@@ -28,6 +28,12 @@
 		4498984B291833DE00D742A0 /* StoreListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4498984A291833DE00D742A0 /* StoreListService.swift */; };
 		4498984D29187B3500D742A0 /* StoreListServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4498984C29187B3500D742A0 /* StoreListServiceProtocol.swift */; };
 		4498984F2919AC3900D742A0 /* StoreListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4498984E2919AC3900D742A0 /* StoreListViewModel.swift */; };
+		8566A10F29BCC64500E8BA11 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8566A10E29BCC64500E8BA11 /* SearchResultsViewController.swift */; };
+		8566A11129BD431F00E8BA11 /* SearchResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8566A11029BD431F00E8BA11 /* SearchResultsViewModel.swift */; };
+		8566A11329BE132C00E8BA11 /* SearchResultsViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8566A11229BE132C00E8BA11 /* SearchResultsViewModelProtocol.swift */; };
+		85A26D9529BA636700D47823 /* IceCreamCake.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 85A26D9329BA636700D47823 /* IceCreamCake.xcdatamodeld */; };
+		85A26D9829BA6B3700D47823 /* FavoriteStore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A26D9629BA6B3700D47823 /* FavoriteStore+CoreDataClass.swift */; };
+		85EF294F29C1069C0020DDDD /* SearchResultsViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EF294E29C1069C0020DDDD /* SearchResultsViewController+TableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +58,12 @@
 		4498984A291833DE00D742A0 /* StoreListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreListService.swift; sourceTree = "<group>"; };
 		4498984C29187B3500D742A0 /* StoreListServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreListServiceProtocol.swift; sourceTree = "<group>"; };
 		4498984E2919AC3900D742A0 /* StoreListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreListViewModel.swift; sourceTree = "<group>"; };
+		8566A10E29BCC64500E8BA11 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		8566A11029BD431F00E8BA11 /* SearchResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewModel.swift; sourceTree = "<group>"; };
+		8566A11229BE132C00E8BA11 /* SearchResultsViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewModelProtocol.swift; sourceTree = "<group>"; };
+		85A26D9429BA636700D47823 /* IceCreamCake.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IceCreamCake.xcdatamodel; sourceTree = "<group>"; };
+		85A26D9629BA6B3700D47823 /* FavoriteStore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteStore+CoreDataClass.swift"; sourceTree = "<group>"; };
+		85EF294E29C1069C0020DDDD /* SearchResultsViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchResultsViewController+TableView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,11 +100,14 @@
 			children = (
 				447762FA28F79C56005C6502 /* Coordinator */,
 				447762F828F79C16005C6502 /* StoreList */,
+				8566A10D29BCC30400E8BA11 /* SearchResults */,
 				447762C928EE1AF1005C6502 /* AppDelegate.swift */,
 				447762CB28EE1AF1005C6502 /* SceneDelegate.swift */,
 				447762D228EE1AF3005C6502 /* Assets.xcassets */,
 				447762D728EE1AF3005C6502 /* Info.plist */,
 				4498984729176C5E00D742A0 /* Constants.swift */,
+				85A26D9329BA636700D47823 /* IceCreamCake.xcdatamodeld */,
+				85A26D9A29BA6B8300D47823 /* FavoriteStore */,
 			);
 			path = IceCreamCake;
 			sourceTree = "<group>";
@@ -154,6 +169,33 @@
 			children = (
 				447762FD28FBA269005C6502 /* StoreListViewController+TableView.swift */,
 				447762FB28FBA1C4005C6502 /* StoreListViewController+CollectionView.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8566A10D29BCC30400E8BA11 /* SearchResults */ = {
+			isa = PBXGroup;
+			children = (
+				8566A10E29BCC64500E8BA11 /* SearchResultsViewController.swift */,
+				8566A11029BD431F00E8BA11 /* SearchResultsViewModel.swift */,
+				8566A11229BE132C00E8BA11 /* SearchResultsViewModelProtocol.swift */,
+				85EF295029C106BF0020DDDD /* Extensions */,
+			);
+			path = SearchResults;
+			sourceTree = "<group>";
+		};
+		85A26D9A29BA6B8300D47823 /* FavoriteStore */ = {
+			isa = PBXGroup;
+			children = (
+				85A26D9629BA6B3700D47823 /* FavoriteStore+CoreDataClass.swift */,
+			);
+			path = FavoriteStore;
+			sourceTree = "<group>";
+		};
+		85EF295029C106BF0020DDDD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				85EF294E29C1069C0020DDDD /* SearchResultsViewController+TableView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -236,9 +278,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				447762CA28EE1AF1005C6502 /* AppDelegate.swift in Sources */,
+				8566A11129BD431F00E8BA11 /* SearchResultsViewModel.swift in Sources */,
 				4498984829176C5E00D742A0 /* Constants.swift in Sources */,
 				447762E828F086F0005C6502 /* StoreListCoordinator.swift in Sources */,
 				4477E8152916B5C10027A060 /* Store.swift in Sources */,
+				8566A11329BE132C00E8BA11 /* SearchResultsViewModelProtocol.swift in Sources */,
 				4492A7B92905E6CB002CEFFE /* BannerCollectionViewCell.swift in Sources */,
 				447762FE28FBA269005C6502 /* StoreListViewController+TableView.swift in Sources */,
 				4498984F2919AC3900D742A0 /* StoreListViewModel.swift in Sources */,
@@ -246,12 +290,16 @@
 				447762E028EF6C2F005C6502 /* AppCoordinator.swift in Sources */,
 				447762F028F5E5DA005C6502 /* StoreType.swift in Sources */,
 				447762DE28EF659E005C6502 /* Coordinator.swift in Sources */,
+				85A26D9829BA6B3700D47823 /* FavoriteStore+CoreDataClass.swift in Sources */,
 				44878AF6291B4F160090444A /* Banner.swift in Sources */,
 				4498984B291833DE00D742A0 /* StoreListService.swift in Sources */,
 				447762E628F07F0C005C6502 /* StoreListViewModelProtocol.swift in Sources */,
+				85A26D9529BA636700D47823 /* IceCreamCake.xcdatamodeld in Sources */,
 				447762FC28FBA1C4005C6502 /* StoreListViewController+CollectionView.swift in Sources */,
+				85EF294F29C1069C0020DDDD /* SearchResultsViewController+TableView.swift in Sources */,
 				447762CC28EE1AF1005C6502 /* SceneDelegate.swift in Sources */,
 				4498984D29187B3500D742A0 /* StoreListServiceProtocol.swift in Sources */,
+				8566A10F29BCC64500E8BA11 /* SearchResultsViewController.swift in Sources */,
 				447762E228F07E44005C6502 /* StoreListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -481,6 +529,19 @@
 			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		85A26D9329BA636700D47823 /* IceCreamCake.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				85A26D9429BA636700D47823 /* IceCreamCake.xcdatamodel */,
+			);
+			currentVersion = 85A26D9429BA636700D47823 /* IceCreamCake.xcdatamodel */;
+			path = IceCreamCake.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 447762BE28EE1AF1005C6502 /* Project object */;
 }
