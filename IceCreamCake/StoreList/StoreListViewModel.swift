@@ -52,7 +52,9 @@ class StoreListViewModel: StoreListViewModelProtocol {
     }
     
     func search(for text: String) {
-        coordinator.goToSearchResults(for: text, with: storeList)
+        if text.trimmingCharacters(in: .whitespacesAndNewlines).count >= 2 {
+            coordinator.goToSearchResults(for: text, with: storeList)
+        }
     }
 }
 

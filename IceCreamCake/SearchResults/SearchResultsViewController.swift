@@ -111,7 +111,7 @@ class SearchResultsViewController: UIViewController {
 extension SearchResultsViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let searchText: String = searchBar.text ?? ""
-        if searchText != "" {
+        if searchText.trimmingCharacters(in: .whitespacesAndNewlines).count >= 2 {
             viewModel.getSearchResults(for: searchText) { [weak self] in
                 DispatchQueue.main.async {
                     self?.searchResultsTableView.reloadData()

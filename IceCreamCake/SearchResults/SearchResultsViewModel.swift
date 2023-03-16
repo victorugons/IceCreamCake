@@ -11,12 +11,12 @@ class SearchResultsViewModel: SearchResultsViewModelProtocol {
     }
     
     func getFirstSearchResults() {
-        searchResults = stores.filter { $0.name.contains(firstSearchText) }
+        searchResults = stores.filter { $0.name.range(of: firstSearchText, options: .caseInsensitive) != nil ? true : false }
         print(searchResults)
     }
     
     func getSearchResults(for text: String, completion: @escaping () -> Void) {
-        searchResults = stores.filter { $0.name.contains(text) }
+        searchResults = stores.filter { $0.name.range(of: text, options: .caseInsensitive) != nil ? true : false }
         completion()
     }
 }
