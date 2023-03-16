@@ -22,7 +22,6 @@ class StoreListViewController: UIViewController {
         let button = UIButton()
         button.setImage(UIImage(systemName: "heart"), for: .normal)
         button.tintColor = .darkGray
-        button.addTarget(self, action: #selector(showFavorites), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -31,7 +30,6 @@ class StoreListViewController: UIViewController {
         let button = UIButton()
         button.setImage(UIImage(systemName: "arrow.up.arrow.down"), for: .normal)
         button.tintColor = .darkGray
-        button.addTarget(self, action: #selector(showFavorites), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -40,7 +38,6 @@ class StoreListViewController: UIViewController {
         let button = UIButton()
         button.setImage(UIImage(systemName: "line.3.horizontal.decrease.circle"), for: .normal)
         button.tintColor = .darkGray
-        button.addTarget(self, action: #selector(showFavorites), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -214,10 +211,6 @@ class StoreListViewController: UIViewController {
             storeTypeLabel.textColor = #colorLiteral(red: 1, green: 0, blue: 0, alpha: 0.9508226407)
             bannersPageControl.currentPageIndicatorTintColor = #colorLiteral(red: 1, green: 0, blue: 0, alpha: 1)
         }
-    }
-    
-    @objc private func showFavorites() {
-        print("Teste Favoritos")
     }
 }
 
