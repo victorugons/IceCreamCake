@@ -56,5 +56,9 @@ class StoreListViewModel: StoreListViewModelProtocol {
             coordinator.goToSearchResults(for: text, with: storeList)
         }
     }
+    
+    func presentFilterModal() {
+        coordinator.presentFilterModal()
+    }
 }
 
