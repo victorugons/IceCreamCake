@@ -31,6 +31,8 @@
 		8566A10F29BCC64500E8BA11 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8566A10E29BCC64500E8BA11 /* SearchResultsViewController.swift */; };
 		8566A11129BD431F00E8BA11 /* SearchResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8566A11029BD431F00E8BA11 /* SearchResultsViewModel.swift */; };
 		8566A11329BE132C00E8BA11 /* SearchResultsViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8566A11229BE132C00E8BA11 /* SearchResultsViewModelProtocol.swift */; };
+		85942FE529C3F3960044295C /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85942FE429C3F3960044295C /* FilterViewController.swift */; };
+		85942FE729C619620044295C /* SortMenuSate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85942FE629C619620044295C /* SortMenuSate.swift */; };
 		85A26D9529BA636700D47823 /* IceCreamCake.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 85A26D9329BA636700D47823 /* IceCreamCake.xcdatamodeld */; };
 		85A26D9829BA6B3700D47823 /* FavoriteStore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A26D9629BA6B3700D47823 /* FavoriteStore+CoreDataClass.swift */; };
 		85EF294F29C1069C0020DDDD /* SearchResultsViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EF294E29C1069C0020DDDD /* SearchResultsViewController+TableView.swift */; };
@@ -61,6 +63,8 @@
 		8566A10E29BCC64500E8BA11 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		8566A11029BD431F00E8BA11 /* SearchResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewModel.swift; sourceTree = "<group>"; };
 		8566A11229BE132C00E8BA11 /* SearchResultsViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewModelProtocol.swift; sourceTree = "<group>"; };
+		85942FE429C3F3960044295C /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		85942FE629C619620044295C /* SortMenuSate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortMenuSate.swift; sourceTree = "<group>"; };
 		85A26D9429BA636700D47823 /* IceCreamCake.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IceCreamCake.xcdatamodel; sourceTree = "<group>"; };
 		85A26D9629BA6B3700D47823 /* FavoriteStore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteStore+CoreDataClass.swift"; sourceTree = "<group>"; };
 		85EF294E29C1069C0020DDDD /* SearchResultsViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchResultsViewController+TableView.swift"; sourceTree = "<group>"; };
@@ -100,7 +104,6 @@
 			children = (
 				447762FA28F79C56005C6502 /* Coordinator */,
 				447762F828F79C16005C6502 /* StoreList */,
-				8566A10D29BCC30400E8BA11 /* SearchResults */,
 				447762C928EE1AF1005C6502 /* AppDelegate.swift */,
 				447762CB28EE1AF1005C6502 /* SceneDelegate.swift */,
 				447762D228EE1AF3005C6502 /* Assets.xcassets */,
@@ -115,15 +118,16 @@
 		447762F828F79C16005C6502 /* StoreList */ = {
 			isa = PBXGroup;
 			children = (
-				4477E8132916B5B00027A060 /* Model */,
 				447762E728F086F0005C6502 /* StoreListCoordinator.swift */,
 				447762E128F07E44005C6502 /* StoreListViewController.swift */,
-				447762E528F07F0B005C6502 /* StoreListViewModelProtocol.swift */,
-				4498984E2919AC3900D742A0 /* StoreListViewModel.swift */,
-				447762EF28F5E5DA005C6502 /* StoreType.swift */,
+				85942FE829C6554D0044295C /* ViewModel */,
+				4477E8132916B5B00027A060 /* Model */,
 				447762FF28FCAF21005C6502 /* CustomViews */,
 				44989849291833C900D742A0 /* Service */,
 				449898502919ECD500D742A0 /* Extensions */,
+				85942FE929C655640044295C /* Enum */,
+				8566A10D29BCC30400E8BA11 /* SearchResults */,
+				85942FE329C3F2C90044295C /* FilterModal */,
 			);
 			path = StoreList;
 			sourceTree = "<group>";
@@ -182,6 +186,32 @@
 				85EF295029C106BF0020DDDD /* Extensions */,
 			);
 			path = SearchResults;
+			sourceTree = "<group>";
+		};
+		85942FE329C3F2C90044295C /* FilterModal */ = {
+			isa = PBXGroup;
+			children = (
+				85942FE429C3F3960044295C /* FilterViewController.swift */,
+			);
+			path = FilterModal;
+			sourceTree = "<group>";
+		};
+		85942FE829C6554D0044295C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4498984E2919AC3900D742A0 /* StoreListViewModel.swift */,
+				447762E528F07F0B005C6502 /* StoreListViewModelProtocol.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		85942FE929C655640044295C /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				447762EF28F5E5DA005C6502 /* StoreType.swift */,
+				85942FE629C619620044295C /* SortMenuSate.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 		85A26D9A29BA6B8300D47823 /* FavoriteStore */ = {
@@ -281,12 +311,14 @@
 				8566A11129BD431F00E8BA11 /* SearchResultsViewModel.swift in Sources */,
 				4498984829176C5E00D742A0 /* Constants.swift in Sources */,
 				447762E828F086F0005C6502 /* StoreListCoordinator.swift in Sources */,
+				85942FE729C619620044295C /* SortMenuSate.swift in Sources */,
 				4477E8152916B5C10027A060 /* Store.swift in Sources */,
 				8566A11329BE132C00E8BA11 /* SearchResultsViewModelProtocol.swift in Sources */,
 				4492A7B92905E6CB002CEFFE /* BannerCollectionViewCell.swift in Sources */,
 				447762FE28FBA269005C6502 /* StoreListViewController+TableView.swift in Sources */,
 				4498984F2919AC3900D742A0 /* StoreListViewModel.swift in Sources */,
 				4477630128FCB12F005C6502 /* StoreTableViewCell.swift in Sources */,
+				85942FE529C3F3960044295C /* FilterViewController.swift in Sources */,
 				447762E028EF6C2F005C6502 /* AppCoordinator.swift in Sources */,
 				447762F028F5E5DA005C6502 /* StoreType.swift in Sources */,
 				447762DE28EF659E005C6502 /* Coordinator.swift in Sources */,
@@ -434,7 +466,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -461,7 +493,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
