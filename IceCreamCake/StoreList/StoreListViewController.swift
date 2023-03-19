@@ -272,14 +272,25 @@ class StoreListViewController: UIViewController {
     
     private func toggleAlphabeticalSort() {
         sortMenuState = sortMenuState == .alphabeticalOrder ? .defaultOrder : .alphabeticalOrder
+        sortStores()
     }
     
     private func toggleInverseAlphabeticalSort() {
         sortMenuState = sortMenuState == .inverseAlphabeticalOrder ? .defaultOrder : .inverseAlphabeticalOrder
+        sortStores()
     }
     
     private func toggleRatingSort() {
         sortMenuState = sortMenuState == .ratingOrder ? .defaultOrder : .ratingOrder
+        sortStores()
+    }
+    
+    private func sortStores() {
+        viewModel.sortStores(with: sortMenuState) {
+            DispatchQueue.main.async { [weak self] in
+                self?.storeListTableView.reloadData()
+            }
+        }
     }
 }
 

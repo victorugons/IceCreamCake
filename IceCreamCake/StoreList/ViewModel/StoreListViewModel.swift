@@ -6,6 +6,7 @@ class StoreListViewModel: StoreListViewModelProtocol {
     
     var storeType: StoreType
     var storeList: [Store] = []
+    var sortedStoreList: [Store] = []
     var favoritesList: [FavoriteStore] = []
     var banners: [Banner] = []
     
@@ -55,6 +56,20 @@ class StoreListViewModel: StoreListViewModelProtocol {
         if text.trimmingCharacters(in: .whitespacesAndNewlines).count >= 2 {
             coordinator.goToSearchResults(for: text, with: storeList)
         }
+    }
+    
+    func sortStores(with state: SortMenuState, completion: @escaping () -> Void) {
+        switch state {
+        case .defaultOrder:
+            break
+        case .alphabeticalOrder:
+            sortedStoreList = storeList.sorted { $0.name.lowercased() < $1.name.lowercased() }
+        case .inverseAlphabeticalOrder:
+            sortedStoreList = storeList.sorted { $0.name.lowercased() > $1.name.lowercased() }
+        case .ratingOrder:
+            sortedStoreList = storeList.sorted { Double($0.rating) ?? 1 > Double($1.rating) ?? 0 }
+        }
+        completion() 
     }
     
     func presentFilterModal() {
