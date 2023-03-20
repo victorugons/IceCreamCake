@@ -10,12 +10,8 @@ class SearchResultsViewController: UIViewController {
         return searchController
     }()
     
-    private lazy var sortButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "arrow.up.arrow.down"), for: .normal)
-        button.tintColor = .darkGray
-//        button.addTarget(self, action: #selector(showFavorites), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
+    private lazy var sortButton: StoreSortButton = {
+        let button = StoreSortButton(sortFunction: sortStores)
         return button
     }()
 
@@ -23,7 +19,6 @@ class SearchResultsViewController: UIViewController {
         let button = UIButton()
         button.setImage(UIImage(systemName: "line.3.horizontal.decrease.circle"), for: .normal)
         button.tintColor = .darkGray
-//        button.addTarget(self, action: #selector(showFavorites), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -60,7 +55,7 @@ class SearchResultsViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         viewModel.getFirstSearchResults()
-        searchController.searchBar.text = viewModel.firstSearchText
+        searchController.searchBar.text = viewModel.searchText
         addSubviews()
         setupConstraints()
     }
@@ -105,6 +100,14 @@ class SearchResultsViewController: UIViewController {
             searchResultsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             searchResultsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+    
+    private func sortStores() {
+        viewModel.sortStores(with: sortButton.getSortMenuState()) {
+            DispatchQueue.main.async { [weak self] in
+                self?.searchResultsTableView.reloadData()
+            }
+        }
     }
 }
 

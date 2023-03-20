@@ -1,7 +1,7 @@
 import UIKit
 
-protocol SearchResultsViewModelProtocol {
-    var firstSearchText: String { get }
+protocol SearchResultsViewModelProtocol: StoreListActionsProtocol {
+    var searchText: String { get }
     var searchResults: [Store] { get }
     
     func getFirstSearchResults()
