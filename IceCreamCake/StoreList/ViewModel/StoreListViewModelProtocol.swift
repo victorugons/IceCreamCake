@@ -1,6 +1,6 @@
 import UIKit
 
-protocol StoreListViewModelProtocol {
+protocol StoreListViewModelProtocol: StoreListActionsProtocol {
     var storeType: StoreType { get }
     var storeList: [Store] { get }
     var sortedStoreList: [Store] { get }
@@ -10,5 +10,4 @@ protocol StoreListViewModelProtocol {
     func getBanners(completion: @escaping () -> Void)
     func getStoreType() -> String
     func search(for text: String)
-    func sortStores(with state: SortMenuState, completion: @escaping () -> Void)
 }

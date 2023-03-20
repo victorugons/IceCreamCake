@@ -33,6 +33,8 @@
 		8566A11329BE132C00E8BA11 /* SearchResultsViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8566A11229BE132C00E8BA11 /* SearchResultsViewModelProtocol.swift */; };
 		85942FE529C3F3960044295C /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85942FE429C3F3960044295C /* FilterViewController.swift */; };
 		85942FE729C619620044295C /* SortMenuSate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85942FE629C619620044295C /* SortMenuSate.swift */; };
+		85942FEB29C7CB690044295C /* StoreListActionsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85942FEA29C7CB690044295C /* StoreListActionsProtocol.swift */; };
+		85942FF329C8AB9A0044295C /* SortButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85942FF229C8AB9A0044295C /* SortButton.swift */; };
 		85A26D9529BA636700D47823 /* IceCreamCake.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 85A26D9329BA636700D47823 /* IceCreamCake.xcdatamodeld */; };
 		85A26D9829BA6B3700D47823 /* FavoriteStore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A26D9629BA6B3700D47823 /* FavoriteStore+CoreDataClass.swift */; };
 		85EF294F29C1069C0020DDDD /* SearchResultsViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EF294E29C1069C0020DDDD /* SearchResultsViewController+TableView.swift */; };
@@ -65,6 +67,8 @@
 		8566A11229BE132C00E8BA11 /* SearchResultsViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewModelProtocol.swift; sourceTree = "<group>"; };
 		85942FE429C3F3960044295C /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		85942FE629C619620044295C /* SortMenuSate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortMenuSate.swift; sourceTree = "<group>"; };
+		85942FEA29C7CB690044295C /* StoreListActionsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreListActionsProtocol.swift; sourceTree = "<group>"; };
+		85942FF229C8AB9A0044295C /* SortButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortButton.swift; sourceTree = "<group>"; };
 		85A26D9429BA636700D47823 /* IceCreamCake.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IceCreamCake.xcdatamodel; sourceTree = "<group>"; };
 		85A26D9629BA6B3700D47823 /* FavoriteStore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteStore+CoreDataClass.swift"; sourceTree = "<group>"; };
 		85EF294E29C1069C0020DDDD /* SearchResultsViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchResultsViewController+TableView.swift"; sourceTree = "<group>"; };
@@ -128,6 +132,7 @@
 				85942FE929C655640044295C /* Enum */,
 				8566A10D29BCC30400E8BA11 /* SearchResults */,
 				85942FE329C3F2C90044295C /* FilterModal */,
+				85942FEA29C7CB690044295C /* StoreListActionsProtocol.swift */,
 			);
 			path = StoreList;
 			sourceTree = "<group>";
@@ -146,6 +151,7 @@
 			children = (
 				4477630028FCB12F005C6502 /* StoreTableViewCell.swift */,
 				4492A7B82905E6CB002CEFFE /* BannerCollectionViewCell.swift */,
+				85942FF229C8AB9A0044295C /* SortButton.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -327,8 +333,10 @@
 				4498984B291833DE00D742A0 /* StoreListService.swift in Sources */,
 				447762E628F07F0C005C6502 /* StoreListViewModelProtocol.swift in Sources */,
 				85A26D9529BA636700D47823 /* IceCreamCake.xcdatamodeld in Sources */,
+				85942FF329C8AB9A0044295C /* SortButton.swift in Sources */,
 				447762FC28FBA1C4005C6502 /* StoreListViewController+CollectionView.swift in Sources */,
 				85EF294F29C1069C0020DDDD /* SearchResultsViewController+TableView.swift in Sources */,
+				85942FEB29C7CB690044295C /* StoreListActionsProtocol.swift in Sources */,
 				447762CC28EE1AF1005C6502 /* SceneDelegate.swift in Sources */,
 				4498984D29187B3500D742A0 /* StoreListServiceProtocol.swift in Sources */,
 				8566A10F29BCC64500E8BA11 /* SearchResultsViewController.swift in Sources */,

@@ -3,7 +3,6 @@ import UIKit
 class StoreListViewController: UIViewController {
     
     var viewModel: StoreListViewModelProtocol
-    var sortMenuState: SortMenuState = .defaultOrder
     
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController()
@@ -27,13 +26,8 @@ class StoreListViewController: UIViewController {
         return button
     }()
     
-    private lazy var sortButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "arrow.up.arrow.down"), for: .normal)
-        button.tintColor = .darkGray
-        button.showsMenuAsPrimaryAction = true
-        button.menu = getSortMenu()
-        button.translatesAutoresizingMaskIntoConstraints = false
+    private(set) lazy var sortButton: StoreSortButton = {
+        let button = StoreSortButton(sortFunction: sortStores)
         return button
     }()
     
@@ -216,77 +210,8 @@ class StoreListViewController: UIViewController {
         }
     }
     
-    private func getSortMenu() -> UIMenu {
-        var alphabeticalOrderAction = UIAction(title: "Alfabética (A-Z)",
-                                                         image: UIImage(systemName: "abc"),
-                                                         state: .off) {
-                            [weak self] (action) in
-                            self?.toggleAlphabeticalSort()
-                            self?.sortButton.menu = self?.getSortMenu()
-                        }
-        var inverseAlphabeticalOrderAction = UIAction(title: "Alfabética (Z-A)",
-                                                                                                 image: UIImage(systemName: "abc"),
-                                                                                                 state: .off) {
-                                                             [weak self] (action) in
-                                                             self?.toggleInverseAlphabeticalSort()
-                                                             self?.sortButton.menu = self?.getSortMenu()
-                                                         }
-        var ratingOrderAction = UIAction(title: "Melhor avaliação",
-                                         image: UIImage(systemName: "star.fill"),
-                                         state: .off) {
-                  [weak self] (action) in
-                  self?.toggleRatingSort()
-                  self?.sortButton.menu = self?.getSortMenu()
-              }
-        
-        switch sortMenuState {
-        case .defaultOrder:
-            break
-        case .alphabeticalOrder:
-            alphabeticalOrderAction = UIAction(title: "Alfabética (A-Z)",
-                                             image: UIImage(systemName: "abc"),
-                                             state: .on) {
-                [weak self] (action) in
-                self?.toggleAlphabeticalSort()
-                self?.sortButton.menu = self?.getSortMenu()
-            }
-        case .inverseAlphabeticalOrder:
-            inverseAlphabeticalOrderAction = UIAction(title: "Alfabética (Z-A)",
-                                                    image: UIImage(systemName: "abc"),
-                                                    state: .on) {
-                [weak self] (action) in
-                self?.toggleInverseAlphabeticalSort()
-                self?.sortButton.menu = self?.getSortMenu()
-            }
-        case .ratingOrder:
-            ratingOrderAction = UIAction(title: "Melhor avaliação",
-                                       image: UIImage(systemName: "star.fill"),
-                                       state: .on) {
-                [weak self] (action) in
-                self?.toggleRatingSort()
-                self?.sortButton.menu = self?.getSortMenu()
-            }
-        }
-        return UIMenu(title: "Ordenar", children: [alphabeticalOrderAction, inverseAlphabeticalOrderAction, ratingOrderAction])
-    }
-    
-    private func toggleAlphabeticalSort() {
-        sortMenuState = sortMenuState == .alphabeticalOrder ? .defaultOrder : .alphabeticalOrder
-        sortStores()
-    }
-    
-    private func toggleInverseAlphabeticalSort() {
-        sortMenuState = sortMenuState == .inverseAlphabeticalOrder ? .defaultOrder : .inverseAlphabeticalOrder
-        sortStores()
-    }
-    
-    private func toggleRatingSort() {
-        sortMenuState = sortMenuState == .ratingOrder ? .defaultOrder : .ratingOrder
-        sortStores()
-    }
-    
     private func sortStores() {
-        viewModel.sortStores(with: sortMenuState) {
+        viewModel.sortStores(with: sortButton.getSortMenuState()) {
             DispatchQueue.main.async { [weak self] in
                 self?.storeListTableView.reloadData()
             }
