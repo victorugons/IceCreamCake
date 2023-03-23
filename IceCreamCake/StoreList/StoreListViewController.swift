@@ -7,6 +7,7 @@ class StoreListViewController: UIViewController {
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController()
         searchController.searchBar.delegate = self
+        searchController.searchBar.placeholder = "Buscar"
         return searchController
     }()
     
