@@ -35,6 +35,7 @@ class StoreListViewController: UIViewController {
     private lazy var filterButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "line.3.horizontal.decrease.circle"), for: .normal)
+        button.addTarget(self, action: #selector(presentFilterModal), for: .touchUpInside)
         button.tintColor = .darkGray
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -62,9 +63,10 @@ class StoreListViewController: UIViewController {
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 2, left: 32, bottom: 2, right: 32)
         let width = UIScreen.main.bounds.width
-        layout.itemSize = CGSize(width: width - 96, height: 120)
+        layout.itemSize = CGSize(width: width - 96, height: 156)
         layout.minimumLineSpacing = 64
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(BannerCollectionViewCell.self, forCellWithReuseIdentifier: BannerCollectionViewCell.identifier)
@@ -83,6 +85,7 @@ class StoreListViewController: UIViewController {
     
     private lazy var storeListTableView: UITableView = {
         let tableView = UITableView()
+        tableView.backgroundColor = .clear
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(StoreTableViewCell.self, forCellReuseIdentifier: StoreTableViewCell.identifier)
@@ -103,7 +106,7 @@ class StoreListViewController: UIViewController {
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .white
         navigationItem.searchController = searchController
         addSubviews()
         setupConstraints()
@@ -177,7 +180,7 @@ class StoreListViewController: UIViewController {
             bannersCollectionView.topAnchor.constraint(equalTo: headerStackView.bottomAnchor, constant: 16),
             bannersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             bannersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            bannersCollectionView.heightAnchor.constraint(equalToConstant: 124)
+            bannersCollectionView.heightAnchor.constraint(equalToConstant: 160)
         ])
     }
     
@@ -218,11 +221,34 @@ class StoreListViewController: UIViewController {
             }
         }
     }
+    
+    @objc
+    private func presentFilterModal() {
+        viewModel.presentFilterModal(delegate: self)
+    }
 }
 
 extension StoreListViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let searchText: String = searchBar.text ?? ""
         viewModel.search(for: searchText)
+    }
+}
+
+extension StoreListViewController: FilterDelegate {
+    func filter(with state: String) {
+        viewModel.filter(with: state) { [weak self] in
+            DispatchQueue.main.async {
+                self?.storeListTableView.reloadData()
+            }
+        }
+    }
+    
+    func removeFilter() {
+        viewModel.removeFilter {
+            DispatchQueue.main.async { [weak self] in
+                self?.storeListTableView.reloadData()
+            }
+        }
     }
 }

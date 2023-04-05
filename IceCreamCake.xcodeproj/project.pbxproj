@@ -28,6 +28,10 @@
 		4498984B291833DE00D742A0 /* StoreListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4498984A291833DE00D742A0 /* StoreListService.swift */; };
 		4498984D29187B3500D742A0 /* StoreListServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4498984C29187B3500D742A0 /* StoreListServiceProtocol.swift */; };
 		4498984F2919AC3900D742A0 /* StoreListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4498984E2919AC3900D742A0 /* StoreListViewModel.swift */; };
+		854178BA29CE5D3D00E722F3 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854178B929CE5D3D00E722F3 /* FilterViewModel.swift */; };
+		854178BC29CE5E4B00E722F3 /* FilterViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854178BB29CE5E4B00E722F3 /* FilterViewModelProtocol.swift */; };
+		854178BE29CE800700E722F3 /* Sequence+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854178BD29CE800700E722F3 /* Sequence+Extensions.swift */; };
+		854178C129CE858200E722F3 /* FilterViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854178C029CE858200E722F3 /* FilterViewController+TableView.swift */; };
 		8566A10F29BCC64500E8BA11 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8566A10E29BCC64500E8BA11 /* SearchResultsViewController.swift */; };
 		8566A11129BD431F00E8BA11 /* SearchResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8566A11029BD431F00E8BA11 /* SearchResultsViewModel.swift */; };
 		8566A11329BE132C00E8BA11 /* SearchResultsViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8566A11229BE132C00E8BA11 /* SearchResultsViewModelProtocol.swift */; };
@@ -38,6 +42,7 @@
 		85A26D9529BA636700D47823 /* IceCreamCake.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 85A26D9329BA636700D47823 /* IceCreamCake.xcdatamodeld */; };
 		85A26D9829BA6B3700D47823 /* FavoriteStore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A26D9629BA6B3700D47823 /* FavoriteStore+CoreDataClass.swift */; };
 		85EF294F29C1069C0020DDDD /* SearchResultsViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EF294E29C1069C0020DDDD /* SearchResultsViewController+TableView.swift */; };
+		85FF793629DA3E520035BF87 /* FilterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FF793529DA3E520035BF87 /* FilterDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +67,10 @@
 		4498984A291833DE00D742A0 /* StoreListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreListService.swift; sourceTree = "<group>"; };
 		4498984C29187B3500D742A0 /* StoreListServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreListServiceProtocol.swift; sourceTree = "<group>"; };
 		4498984E2919AC3900D742A0 /* StoreListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreListViewModel.swift; sourceTree = "<group>"; };
+		854178B929CE5D3D00E722F3 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
+		854178BB29CE5E4B00E722F3 /* FilterViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModelProtocol.swift; sourceTree = "<group>"; };
+		854178BD29CE800700E722F3 /* Sequence+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Extensions.swift"; sourceTree = "<group>"; };
+		854178C029CE858200E722F3 /* FilterViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilterViewController+TableView.swift"; sourceTree = "<group>"; };
 		8566A10E29BCC64500E8BA11 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		8566A11029BD431F00E8BA11 /* SearchResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewModel.swift; sourceTree = "<group>"; };
 		8566A11229BE132C00E8BA11 /* SearchResultsViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -72,6 +81,7 @@
 		85A26D9429BA636700D47823 /* IceCreamCake.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IceCreamCake.xcdatamodel; sourceTree = "<group>"; };
 		85A26D9629BA6B3700D47823 /* FavoriteStore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteStore+CoreDataClass.swift"; sourceTree = "<group>"; };
 		85EF294E29C1069C0020DDDD /* SearchResultsViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchResultsViewController+TableView.swift"; sourceTree = "<group>"; };
+		85FF793529DA3E520035BF87 /* FilterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +189,15 @@
 			children = (
 				447762FD28FBA269005C6502 /* StoreListViewController+TableView.swift */,
 				447762FB28FBA1C4005C6502 /* StoreListViewController+CollectionView.swift */,
+				854178BD29CE800700E722F3 /* Sequence+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		854178BF29CE856B00E722F3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				854178C029CE858200E722F3 /* FilterViewController+TableView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -198,6 +217,10 @@
 			isa = PBXGroup;
 			children = (
 				85942FE429C3F3960044295C /* FilterViewController.swift */,
+				854178B929CE5D3D00E722F3 /* FilterViewModel.swift */,
+				854178BB29CE5E4B00E722F3 /* FilterViewModelProtocol.swift */,
+				854178BF29CE856B00E722F3 /* Extensions */,
+				85FF793529DA3E520035BF87 /* FilterDelegate.swift */,
 			);
 			path = FilterModal;
 			sourceTree = "<group>";
@@ -313,7 +336,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				854178BC29CE5E4B00E722F3 /* FilterViewModelProtocol.swift in Sources */,
 				447762CA28EE1AF1005C6502 /* AppDelegate.swift in Sources */,
+				854178C129CE858200E722F3 /* FilterViewController+TableView.swift in Sources */,
 				8566A11129BD431F00E8BA11 /* SearchResultsViewModel.swift in Sources */,
 				4498984829176C5E00D742A0 /* Constants.swift in Sources */,
 				447762E828F086F0005C6502 /* StoreListCoordinator.swift in Sources */,
@@ -321,6 +346,7 @@
 				4477E8152916B5C10027A060 /* Store.swift in Sources */,
 				8566A11329BE132C00E8BA11 /* SearchResultsViewModelProtocol.swift in Sources */,
 				4492A7B92905E6CB002CEFFE /* BannerCollectionViewCell.swift in Sources */,
+				854178BE29CE800700E722F3 /* Sequence+Extensions.swift in Sources */,
 				447762FE28FBA269005C6502 /* StoreListViewController+TableView.swift in Sources */,
 				4498984F2919AC3900D742A0 /* StoreListViewModel.swift in Sources */,
 				4477630128FCB12F005C6502 /* StoreTableViewCell.swift in Sources */,
@@ -334,7 +360,9 @@
 				447762E628F07F0C005C6502 /* StoreListViewModelProtocol.swift in Sources */,
 				85A26D9529BA636700D47823 /* IceCreamCake.xcdatamodeld in Sources */,
 				85942FF329C8AB9A0044295C /* SortButton.swift in Sources */,
+				85FF793629DA3E520035BF87 /* FilterDelegate.swift in Sources */,
 				447762FC28FBA1C4005C6502 /* StoreListViewController+CollectionView.swift in Sources */,
+				854178BA29CE5D3D00E722F3 /* FilterViewModel.swift in Sources */,
 				85EF294F29C1069C0020DDDD /* SearchResultsViewController+TableView.swift in Sources */,
 				85942FEB29C7CB690044295C /* StoreListActionsProtocol.swift in Sources */,
 				447762CC28EE1AF1005C6502 /* SceneDelegate.swift in Sources */,
@@ -468,7 +496,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = HBJ7444UP2;
+				DEVELOPMENT_TEAM = YL9AK3B862;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = IceCreamCake/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -495,7 +523,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = HBJ7444UP2;
+				DEVELOPMENT_TEAM = YL9AK3B862;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = IceCreamCake/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

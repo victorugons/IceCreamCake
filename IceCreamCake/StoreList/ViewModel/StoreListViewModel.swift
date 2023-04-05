@@ -7,8 +7,10 @@ class StoreListViewModel: StoreListViewModelProtocol {
     var storeType: StoreType
     var storeList: [Store] = []
     var sortedStoreList: [Store] = []
+    var filteredStoreList: [Store] = []
     var favoritesList: [FavoriteStore] = []
     var banners: [Banner] = []
+    var filterState: String?
     
     func getStoreList(completion: @escaping () -> Void) {
         service.fetchStores { [weak self] result in
@@ -63,17 +65,29 @@ class StoreListViewModel: StoreListViewModelProtocol {
         case .defaultOrder:
             break
         case .alphabeticalOrder:
-            sortedStoreList = storeList.sorted { $0.name.lowercased() < $1.name.lowercased() }
+            sortedStoreList = filterState == nil ? storeList.sorted { $0.name.lowercased() < $1.name.lowercased() } : filteredStoreList.sorted { $0.name.lowercased() < $1.name.lowercased() }
         case .inverseAlphabeticalOrder:
-            sortedStoreList = storeList.sorted { $0.name.lowercased() > $1.name.lowercased() }
+            sortedStoreList = filterState == nil ? storeList.sorted { $0.name.lowercased() > $1.name.lowercased() } : filteredStoreList.sorted { $0.name.lowercased() > $1.name.lowercased() }
         case .ratingOrder:
-            sortedStoreList = storeList.sorted { Double($0.rating) ?? 1 > Double($1.rating) ?? 0 }
+            sortedStoreList = filterState == nil ? storeList.sorted { Double($0.rating) ?? 1 > Double($1.rating) ?? 0 } : filteredStoreList.sorted { Double($0.rating) ?? 1 > Double($1.rating) ?? 0 }
         }
         completion() 
     }
     
-    func presentFilterModal() {
-        coordinator.presentFilterModal()
+    func presentFilterModal(delegate: FilterDelegate) {
+        let categories = storeList.map { $0.category }
+        coordinator.presentFilterModal(with: categories.unique(), delegate: delegate, state: filterState)
+    }
+    
+    func filter(with state: String, completion: @escaping () -> Void) {
+        filterState = state
+        filteredStoreList = storeList.filter { $0.category == state }
+        completion()
+    }
+    
+    func removeFilter(completion: @escaping () -> Void) {
+        filterState = nil
+        completion()
     }
 }
 

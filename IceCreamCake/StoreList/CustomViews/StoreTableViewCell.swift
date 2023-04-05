@@ -15,7 +15,7 @@ class StoreTableViewCell: UITableViewCell {
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.text = ""
+        label.textColor = .black
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -23,7 +23,7 @@ class StoreTableViewCell: UITableViewCell {
     
     private lazy var categoryLabel: UILabel = {
         let label = UILabel()
-        label.text = ""
+        label.textColor = .black
         label.numberOfLines = 1
         label.font = UIFont.systemFont(ofSize: 12, weight: .light)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -64,6 +64,7 @@ class StoreTableViewCell: UITableViewCell {
     
     private lazy var ratingLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .black
         label.text = "-"
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -115,6 +116,7 @@ class StoreTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.backgroundColor = .white
         contentView.addSubview(contentStackView)
         setupConstraints()
     }

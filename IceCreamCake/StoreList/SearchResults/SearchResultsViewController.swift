@@ -8,6 +8,7 @@ class SearchResultsViewController: UIViewController {
         let searchController = UISearchController()
         searchController.searchBar.delegate = self
         searchController.searchBar.placeholder = "Buscar"
+        searchController.searchBar.tintColor = .black
         return searchController
     }()
     
@@ -35,6 +36,7 @@ class SearchResultsViewController: UIViewController {
 
     private lazy var searchResultsTableView: UITableView = {
         let tableView = UITableView()
+        tableView.backgroundColor = .clear
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(StoreTableViewCell.self, forCellReuseIdentifier: StoreTableViewCell.identifier)
@@ -45,7 +47,6 @@ class SearchResultsViewController: UIViewController {
     init(viewModel: SearchResultsViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        navigationItem.searchController = searchController
     }
 
     required init?(coder: NSCoder) {
@@ -54,9 +55,10 @@ class SearchResultsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .white
         viewModel.getFirstSearchResults()
         searchController.searchBar.text = viewModel.searchText
+        navigationItem.searchController = searchController
         addSubviews()
         setupConstraints()
     }
@@ -97,7 +99,7 @@ class SearchResultsViewController: UIViewController {
     private func setupSearchResultsTableViewConstraints() {
         NSLayoutConstraint.activate([
             searchResultsTableView.topAnchor.constraint(equalTo: actionsStackView.bottomAnchor, constant: 16),
-            searchResultsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            searchResultsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             searchResultsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             searchResultsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])

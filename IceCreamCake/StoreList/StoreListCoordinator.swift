@@ -36,4 +36,17 @@ final class StoreListCoordinator: Coordinator {
         
         rootViewController.pushViewController(searchResultsViewController, animated: true)
     }
+    
+    func presentFilterModal(with categories: [String], delegate: FilterDelegate, state: String?) {
+        let filterViewModel = FilterViewModel(categories: categories, state: state)
+        let filterViewController = FilterViewController(viewModel: filterViewModel)
+        filterViewController.delegate = delegate
+        let navigationController = UINavigationController(rootViewController: filterViewController)
+        if let sheet = navigationController.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+            sheet.prefersGrabberVisible = true
+        }
+        
+        rootViewController.present(navigationController, animated: true)
+    }
 }
