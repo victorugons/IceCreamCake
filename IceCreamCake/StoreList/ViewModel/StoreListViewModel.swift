@@ -5,6 +5,7 @@ class StoreListViewModel: StoreListViewModelProtocol {
     private let coordinator: StoreListCoordinator
     
     var storeType: StoreType
+    var fullStoreList: [Store] = []
     var storeList: [Store] = []
     var sortedStoreList: [Store] = []
     var filteredStoreList: [Store] = []
@@ -16,6 +17,7 @@ class StoreListViewModel: StoreListViewModelProtocol {
         service.fetchStores { [weak self] result in
             switch result {
             case .success(let storeList):
+                self?.fullStoreList = storeList
                 self?.filterStoresByType(with: storeList)
                 completion()
             case .failure(let error):
@@ -56,7 +58,7 @@ class StoreListViewModel: StoreListViewModelProtocol {
     
     func search(for text: String) {
         if text.trimmingCharacters(in: .whitespacesAndNewlines).count >= 2 {
-            coordinator.goToSearchResults(for: text, with: storeList)
+            coordinator.goToSearchResults(for: text, with: fullStoreList)
         }
     }
     

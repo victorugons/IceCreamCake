@@ -8,7 +8,6 @@ class SearchResultsViewController: UIViewController {
         let searchController = UISearchController()
         searchController.searchBar.delegate = self
         searchController.searchBar.placeholder = "Buscar"
-        searchController.searchBar.tintColor = .black
         return searchController
     }()
     
