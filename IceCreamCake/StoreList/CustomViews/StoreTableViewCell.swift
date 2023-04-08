@@ -82,18 +82,18 @@ class StoreTableViewCell: UITableViewCell {
         return stackView
     }()
     
-    private lazy var favoriteImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "heart")
-        imageView.tintColor = .red
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
+    private lazy var favoriteButton: UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+        button.tintColor = .red
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     private lazy var rightStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
             ratingStackView,
-            favoriteImageView
+            favoriteButton
        ])
         stackView.axis = .horizontal
         stackView.alignment = .center
@@ -134,7 +134,7 @@ class StoreTableViewCell: UITableViewCell {
     private func setupConstraints() {
         setupContentStackView()
         setupStoreImageConstraints()
-        setupFavoriteImageView()
+        setupFavoriteButtonConstraints()
         setupStarImageViewConstraints()
     }
     
@@ -166,10 +166,10 @@ class StoreTableViewCell: UITableViewCell {
         ])
     }
     
-    private func setupFavoriteImageView() {
+    private func setupFavoriteButtonConstraints() {
         NSLayoutConstraint.activate([
-            favoriteImageView.heightAnchor.constraint(equalToConstant: 30),
-            favoriteImageView.widthAnchor.constraint(equalToConstant: 30)
+            favoriteButton.heightAnchor.constraint(equalToConstant: 30),
+            favoriteButton.widthAnchor.constraint(equalToConstant: 30)
         ])
     }
 }
