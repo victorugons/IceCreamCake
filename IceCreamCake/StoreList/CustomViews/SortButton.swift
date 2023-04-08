@@ -39,7 +39,7 @@ class StoreSortButton: UIButton {
     }
     
     private func setupButton() {
-        setImage(UIImage(systemName: "arrow.up.arrow.down"), for: .normal)
+        setBackgroundImage(UIImage(systemName: "arrow.up.arrow.down"), for: .normal)
         tintColor = .darkGray
         showsMenuAsPrimaryAction = true
         menu = getSortMenu()

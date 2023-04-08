@@ -21,7 +21,7 @@ class StoreListViewController: UIViewController {
     
     private lazy var favoritesToggleButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "heart"), for: .normal)
+        button.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
         button.tintColor = .darkGray
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -34,7 +34,7 @@ class StoreListViewController: UIViewController {
     
     private lazy var filterButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "line.3.horizontal.decrease.circle"), for: .normal)
+        button.setBackgroundImage(UIImage(systemName: "line.3.horizontal.decrease.circle"), for: .normal)
         button.addTarget(self, action: #selector(presentFilterModal), for: .touchUpInside)
         button.tintColor = .darkGray
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -147,22 +147,22 @@ class StoreListViewController: UIViewController {
     
     private func setupFavoritesToggleButtonConstraints() {
         NSLayoutConstraint.activate([
-            favoritesToggleButton.heightAnchor.constraint(equalToConstant: 25),
-            favoritesToggleButton.widthAnchor.constraint(equalToConstant: 25)
+            favoritesToggleButton.heightAnchor.constraint(equalToConstant: 23),
+            favoritesToggleButton.widthAnchor.constraint(equalToConstant: 23)
         ])
     }
     
     private func setupSortButtonConstraints() {
         NSLayoutConstraint.activate([
-            sortButton.heightAnchor.constraint(equalToConstant: 25),
-            sortButton.widthAnchor.constraint(equalToConstant: 25)
+            sortButton.heightAnchor.constraint(equalToConstant: 23),
+            sortButton.widthAnchor.constraint(equalToConstant: 23)
         ])
     }
     
     private func setupFilterButtonConstraints() {
         NSLayoutConstraint.activate([
-            filterButton.heightAnchor.constraint(equalToConstant: 25),
-            filterButton.widthAnchor.constraint(equalToConstant: 25)
+            filterButton.heightAnchor.constraint(equalToConstant: 23),
+            filterButton.widthAnchor.constraint(equalToConstant: 23)
         ])
     }
     
