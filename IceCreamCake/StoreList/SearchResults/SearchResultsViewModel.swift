@@ -1,36 +1,29 @@
 import UIKit
 
 class SearchResultsViewModel: SearchResultsViewModelProtocol {
-    private var stores: [Store]
+    private let coordinator: StoreListCoordinator
+    var actions: StoreListActionsProtocol
+    
+    var storeList: [Store]
     var searchText: String
     var searchResults: [Store] = []
     
-    init(searchText: String, stores: [Store]) {
+    init(searchText: String, stores: [Store], coordinator: StoreListCoordinator, actions: StoreListActionsProtocol) {
         self.searchText = searchText
-        self.stores = stores
+        self.storeList = stores
+        self.coordinator = coordinator
+        self.actions = actions
     }
     
     func getFirstSearchResults() {
-        searchResults = stores.filter { $0.name.range(of: searchText, options: .caseInsensitive) != nil ? true : false }
+        searchResults = storeList.filter { $0.name.range(of: searchText, options: .caseInsensitive) != nil ? true : false }
+        actions.storeList = searchResults
     }
     
     func getSearchResults(for text: String, completion: @escaping () -> Void) {
-        searchResults = stores.filter { $0.name.range(of: text, options: .caseInsensitive) != nil ? true : false }
+        searchResults = storeList.filter { $0.name.range(of: text, options: .caseInsensitive) != nil ? true : false }
         searchText = text
-        completion()
-    }
-    
-    func sortStores(with state: SortMenuState, completion: @escaping () -> Void) {
-        switch state {
-        case .defaultOrder:
-            searchResults = stores.filter { $0.name.range(of: searchText, options: .caseInsensitive) != nil ? true : false }
-        case .alphabeticalOrder:
-            searchResults = searchResults.sorted { $0.name.lowercased() < $1.name.lowercased() }
-        case .inverseAlphabeticalOrder:
-            searchResults = searchResults.sorted { $0.name.lowercased() > $1.name.lowercased() }
-        case .ratingOrder:
-            searchResults = searchResults.sorted { Double($0.rating) ?? 1 > Double($1.rating) ?? 0 }
-        }
+        actions.storeList = searchResults
         completion()
     }
 }

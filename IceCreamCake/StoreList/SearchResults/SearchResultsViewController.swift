@@ -11,7 +11,7 @@ class SearchResultsViewController: UIViewController {
         return searchController
     }()
     
-    private lazy var sortButton: StoreSortButton = {
+    private(set) lazy var sortButton: StoreSortButton = {
         let button = StoreSortButton(sortFunction: sortStores)
         return button
     }()
@@ -20,6 +20,7 @@ class SearchResultsViewController: UIViewController {
         let button = UIButton()
         button.setImage(UIImage(systemName: "line.3.horizontal.decrease.circle"), for: .normal)
         button.tintColor = .darkGray
+        button.addTarget(self, action: #selector(presentFilterModal), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -105,11 +106,16 @@ class SearchResultsViewController: UIViewController {
     }
     
     private func sortStores() {
-        viewModel.sortStores(with: sortButton.getSortMenuState()) {
+        viewModel.actions.sortStores(with: sortButton.getSortMenuState()) {
             DispatchQueue.main.async { [weak self] in
                 self?.searchResultsTableView.reloadData()
             }
         }
+    }
+    
+    @objc
+    private func presentFilterModal() {
+        viewModel.actions.presentFilterModal(delegate: self)
     }
 }
 
@@ -121,6 +127,26 @@ extension SearchResultsViewController: UISearchBarDelegate {
                 DispatchQueue.main.async {
                     self?.searchResultsTableView.reloadData()
                 }
+            }
+        }
+    }
+}
+
+extension SearchResultsViewController: FilterDelegate {
+    func filter(with state: String) {
+        sortButton.performDefaultSort()
+        viewModel.actions.filter(with: state) { [weak self] in
+            DispatchQueue.main.async {
+                self?.searchResultsTableView.reloadData()
+            }
+        }
+    }
+    
+    func removeFilter() {
+        sortButton.performDefaultSort()
+        viewModel.actions.removeFilter {
+            DispatchQueue.main.async { [weak self] in
+                self?.searchResultsTableView.reloadData()
             }
         }
     }

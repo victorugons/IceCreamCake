@@ -1,10 +1,3 @@
-//
-//  SortButton.swift
-//  IceCreamCake
-//
-//  Created by Victor Hugo Nunes da Silva on 20/03/23.
-//
-
 import UIKit
 
 class StoreSortButton: UIButton {
@@ -27,6 +20,22 @@ class StoreSortButton: UIButton {
     
     func getSortMenuState() -> SortMenuState {
         return sortMenuState
+    }
+    
+    func performDefaultSort() {
+        switch sortMenuState {
+        case .defaultOrder:
+            break
+        case .alphabeticalOrder:
+            toggleAlphabeticalSort()
+            menu = getSortMenu()
+        case .inverseAlphabeticalOrder:
+            toggleInverseAlphabeticalSort()
+            menu = getSortMenu()
+        case .ratingOrder:
+            toggleRatingSort()
+            menu = getSortMenu()
+        }
     }
     
     private func setupButton() {

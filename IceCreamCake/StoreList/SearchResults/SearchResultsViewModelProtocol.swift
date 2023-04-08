@@ -1,6 +1,8 @@
 import UIKit
 
-protocol SearchResultsViewModelProtocol: StoreListActionsProtocol {
+protocol SearchResultsViewModelProtocol {
+    var actions: StoreListActionsProtocol { get }
+    var storeList: [Store] { get }
     var searchText: String { get }
     var searchResults: [Store] { get }
     

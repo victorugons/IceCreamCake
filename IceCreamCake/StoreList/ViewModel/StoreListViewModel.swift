@@ -3,15 +3,13 @@ import UIKit
 class StoreListViewModel: StoreListViewModelProtocol {
     private let service: StoreListServiceProtocol
     private let coordinator: StoreListCoordinator
+    var actions: StoreListActionsProtocol
     
     var storeType: StoreType
     var fullStoreList: [Store] = []
     var storeList: [Store] = []
-    var sortedStoreList: [Store] = []
-    var filteredStoreList: [Store] = []
     var favoritesList: [FavoriteStore] = []
     var banners: [Banner] = []
-    var filterState: String?
     
     func getStoreList(completion: @escaping () -> Void) {
         service.fetchStores { [weak self] result in
@@ -38,14 +36,16 @@ class StoreListViewModel: StoreListViewModelProtocol {
         }
     }
     
-    init(storeType: StoreType, service: StoreListService, coordinator: StoreListCoordinator) {
+    init(storeType: StoreType, service: StoreListService, coordinator: StoreListCoordinator, actions: StoreListActionsProtocol) {
         self.service = service
         self.storeType = storeType
         self.coordinator = coordinator
+        self.actions = actions
     }
     
     private func filterStoresByType(with storeList: [Store]) {
         self.storeList = storeList.filter { $0.storeType.contains("\(storeType)")}
+        actions.storeList = self.storeList
     }
     
     func printStoreType() {
@@ -60,36 +60,6 @@ class StoreListViewModel: StoreListViewModelProtocol {
         if text.trimmingCharacters(in: .whitespacesAndNewlines).count >= 2 {
             coordinator.goToSearchResults(for: text, with: fullStoreList)
         }
-    }
-    
-    func sortStores(with state: SortMenuState, completion: @escaping () -> Void) {
-        switch state {
-        case .defaultOrder:
-            break
-        case .alphabeticalOrder:
-            sortedStoreList = filterState == nil ? storeList.sorted { $0.name.lowercased() < $1.name.lowercased() } : filteredStoreList.sorted { $0.name.lowercased() < $1.name.lowercased() }
-        case .inverseAlphabeticalOrder:
-            sortedStoreList = filterState == nil ? storeList.sorted { $0.name.lowercased() > $1.name.lowercased() } : filteredStoreList.sorted { $0.name.lowercased() > $1.name.lowercased() }
-        case .ratingOrder:
-            sortedStoreList = filterState == nil ? storeList.sorted { Double($0.rating) ?? 1 > Double($1.rating) ?? 0 } : filteredStoreList.sorted { Double($0.rating) ?? 1 > Double($1.rating) ?? 0 }
-        }
-        completion() 
-    }
-    
-    func presentFilterModal(delegate: FilterDelegate) {
-        let categories = storeList.map { $0.category }
-        coordinator.presentFilterModal(with: categories.unique(), delegate: delegate, state: filterState)
-    }
-    
-    func filter(with state: String, completion: @escaping () -> Void) {
-        filterState = state
-        filteredStoreList = storeList.filter { $0.category == state }
-        completion()
-    }
-    
-    func removeFilter(completion: @escaping () -> Void) {
-        filterState = nil
-        completion()
     }
 }
 

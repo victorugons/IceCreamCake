@@ -12,26 +12,30 @@ final class StoreListCoordinator: Coordinator {
     }
     
     func start() {
+        let service = StoreListService()
+        let actions = StoreListActionsViewModel(coordinator: self)
+        
         switch self.type {
         case .salgados:
-            let salgadosViewModel = StoreListViewModel(storeType: .salgados, service: StoreListService(), coordinator: self)
+            let salgadosViewModel = StoreListViewModel(storeType: .salgados, service: service, coordinator: self, actions: actions)
             let salgadosViewController = StoreListViewController(viewModel: salgadosViewModel)
             rootViewController.setViewControllers([salgadosViewController], animated: true)
             
         case .doces:
-            let docesViewModel = StoreListViewModel(storeType: .doces, service: StoreListService(), coordinator: self)
+            let docesViewModel = StoreListViewModel(storeType: .doces, service: service, coordinator: self, actions: actions)
             let docesViewController = StoreListViewController(viewModel: docesViewModel)
             rootViewController.setViewControllers([docesViewController], animated: true)
             
         case .bebidas:
-            let bebidasViewModel = StoreListViewModel(storeType: .bebidas, service: StoreListService(), coordinator: self)
+            let bebidasViewModel = StoreListViewModel(storeType: .bebidas, service: service, coordinator: self, actions: actions)
             let bebidasViewController = StoreListViewController(viewModel: bebidasViewModel)
             rootViewController.setViewControllers([bebidasViewController], animated: true)
         }
     }
     
     func goToSearchResults(for text: String, with stores: [Store]) {
-        let searchResultsViewModel = SearchResultsViewModel(searchText: text, stores: stores)
+        let actions = StoreListActionsViewModel(coordinator: self)
+        let searchResultsViewModel = SearchResultsViewModel(searchText: text, stores: stores, coordinator: self, actions: actions)
         let searchResultsViewController = SearchResultsViewController(viewModel: searchResultsViewModel)
         
         rootViewController.pushViewController(searchResultsViewController, animated: true)

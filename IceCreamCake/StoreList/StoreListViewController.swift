@@ -215,7 +215,7 @@ class StoreListViewController: UIViewController {
     }
     
     private func sortStores() {
-        viewModel.sortStores(with: sortButton.getSortMenuState()) {
+        viewModel.actions.sortStores(with: sortButton.getSortMenuState()) {
             DispatchQueue.main.async { [weak self] in
                 self?.storeListTableView.reloadData()
             }
@@ -224,7 +224,7 @@ class StoreListViewController: UIViewController {
     
     @objc
     private func presentFilterModal() {
-        viewModel.presentFilterModal(delegate: self)
+        viewModel.actions.presentFilterModal(delegate: self)
     }
 }
 
@@ -237,7 +237,8 @@ extension StoreListViewController: UISearchBarDelegate {
 
 extension StoreListViewController: FilterDelegate {
     func filter(with state: String) {
-        viewModel.filter(with: state) { [weak self] in
+        sortButton.performDefaultSort()
+        viewModel.actions.filter(with: state) { [weak self] in
             DispatchQueue.main.async {
                 self?.storeListTableView.reloadData()
             }
@@ -245,7 +246,8 @@ extension StoreListViewController: FilterDelegate {
     }
     
     func removeFilter() {
-        viewModel.removeFilter {
+        sortButton.performDefaultSort()
+        viewModel.actions.removeFilter {
             DispatchQueue.main.async { [weak self] in
                 self?.storeListTableView.reloadData()
             }
