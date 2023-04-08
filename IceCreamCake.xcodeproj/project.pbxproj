@@ -43,6 +43,7 @@
 		85A26D9829BA6B3700D47823 /* FavoriteStore+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A26D9629BA6B3700D47823 /* FavoriteStore+CoreDataClass.swift */; };
 		85EF294F29C1069C0020DDDD /* SearchResultsViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EF294E29C1069C0020DDDD /* SearchResultsViewController+TableView.swift */; };
 		85FF793629DA3E520035BF87 /* FilterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FF793529DA3E520035BF87 /* FilterDelegate.swift */; };
+		85FF793829DE33EC0035BF87 /* StoreListActionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FF793729DE33EC0035BF87 /* StoreListActionsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,7 @@
 		85A26D9629BA6B3700D47823 /* FavoriteStore+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteStore+CoreDataClass.swift"; sourceTree = "<group>"; };
 		85EF294E29C1069C0020DDDD /* SearchResultsViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchResultsViewController+TableView.swift"; sourceTree = "<group>"; };
 		85FF793529DA3E520035BF87 /* FilterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDelegate.swift; sourceTree = "<group>"; };
+		85FF793729DE33EC0035BF87 /* StoreListActionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreListActionsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 				8566A10D29BCC30400E8BA11 /* SearchResults */,
 				85942FE329C3F2C90044295C /* FilterModal */,
 				85942FEA29C7CB690044295C /* StoreListActionsProtocol.swift */,
+				85FF793729DE33EC0035BF87 /* StoreListActionsViewModel.swift */,
 			);
 			path = StoreList;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				4477630128FCB12F005C6502 /* StoreTableViewCell.swift in Sources */,
 				85942FE529C3F3960044295C /* FilterViewController.swift in Sources */,
 				447762E028EF6C2F005C6502 /* AppCoordinator.swift in Sources */,
+				85FF793829DE33EC0035BF87 /* StoreListActionsViewModel.swift in Sources */,
 				447762F028F5E5DA005C6502 /* StoreType.swift in Sources */,
 				447762DE28EF659E005C6502 /* Coordinator.swift in Sources */,
 				85A26D9829BA6B3700D47823 /* FavoriteStore+CoreDataClass.swift in Sources */,
