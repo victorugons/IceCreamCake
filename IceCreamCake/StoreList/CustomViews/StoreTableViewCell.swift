@@ -4,7 +4,11 @@ class StoreTableViewCell: UITableViewCell {
     
     public static let identifier: String = "StoreTableViewCell"
     
+    private var id: Int64 = 0
+    
     private let standardConstraintValue: CGFloat = 16
+    
+    let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
     
     private lazy var storeImage: UIImageView = {
         let imageView = UIImageView()
@@ -86,6 +90,7 @@ class StoreTableViewCell: UITableViewCell {
         let button = UIButton()
         button.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
         button.tintColor = .red
+        button.addTarget(self, action: #selector(toggleFavoriteState), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -94,7 +99,7 @@ class StoreTableViewCell: UITableViewCell {
         let stackView = UIStackView(arrangedSubviews: [
             ratingStackView,
             favoriteButton
-       ])
+        ])
         stackView.axis = .horizontal
         stackView.alignment = .center
         stackView.spacing = 12
@@ -126,9 +131,14 @@ class StoreTableViewCell: UITableViewCell {
     }
     
     func setupCell(with store: Store) {
+        id = Int64(store.id)
+        print(id)
         nameLabel.text = store.name
         categoryLabel.text = store.category
         ratingLabel.text = store.rating
+        if fetchFavoriteStores().map({ $0.id }).contains(id) {
+            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }
     }
     
     private func setupConstraints() {
@@ -171,5 +181,59 @@ class StoreTableViewCell: UITableViewCell {
             favoriteButton.heightAnchor.constraint(equalToConstant: 30),
             favoriteButton.widthAnchor.constraint(equalToConstant: 30)
         ])
+    }
+    
+    @objc
+    private func toggleFavoriteState() {
+        if let context = self.context {
+            if let storeToRemove = fetchFavoriteStores().first(where: { $0.id == id }){
+                context.delete(storeToRemove)
+                
+                do {
+                    try context.save()
+                    
+                    self.favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+                }
+                catch {
+                    //TODO: - Show alert
+                    print("Error deleting favorite store")
+                }
+            }
+            else {
+                let favoriteStore = FavoriteStore(context: context)
+                favoriteStore.id = self.id
+                favoriteStore.name = self.nameLabel.text
+                favoriteStore.category = self.categoryLabel.text
+                favoriteStore.rating = self.ratingLabel.text
+                
+                do {
+                    try context.save()
+                    
+                    self.favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+                }
+                catch {
+                    //TODO: - Show alert
+                    print("Error saving favorite store")
+                }
+            }
+        }
+        else {
+            print("Context is nil")
+        }
+    }
+    
+    private func fetchFavoriteStores() -> [FavoriteStore] {
+        var favoriteStores: [FavoriteStore] = []
+        if let context = self.context {
+            do {
+                favoriteStores = try context.fetch(FavoriteStore.fetchRequest())
+            }
+            catch {
+                //TODO: - Show alert
+                print("Error fetching favorite stores")
+            }
+        }
+        print(favoriteStores.map { $0.id })
+        return favoriteStores
     }
 }
