@@ -1,0 +1,3 @@
+protocol StoreTableViewCellDelegate {
+    func removeFavorite()
+}

@@ -61,5 +61,18 @@ class StoreListViewModel: StoreListViewModelProtocol {
             coordinator.goToSearchResults(for: text, with: fullStoreList)
         }
     }
+    
+    func goToFavorites() {
+        var favoriteStores: [FavoriteStore]
+        
+        do {
+            try favoriteStores = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext.fetch(FavoriteStore.fetchRequest()) ?? []
+            coordinator.goToFavorites(with: favoriteStores)
+        }
+        catch {
+            //TODO: - Present alert
+            print("Error fetching favorite stores")
+        }
+    }
 }
 

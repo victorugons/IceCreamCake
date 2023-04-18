@@ -10,4 +10,5 @@ protocol StoreListViewModelProtocol {
     func getBanners(completion: @escaping () -> Void)
     func getStoreType() -> String
     func search(for text: String)
+    func goToFavorites()
 }

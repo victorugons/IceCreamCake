@@ -4,7 +4,10 @@ class StoreTableViewCell: UITableViewCell {
     
     public static let identifier: String = "StoreTableViewCell"
     
+    var delegate: StoreTableViewCellDelegate?
+    
     private var id: Int64 = 0
+    private var storeType: [String] = []
     
     private let standardConstraintValue: CGFloat = 16
     
@@ -132,12 +135,15 @@ class StoreTableViewCell: UITableViewCell {
     
     func setupCell(with store: Store) {
         id = Int64(store.id)
-        print(id)
+        storeType = store.storeType
         nameLabel.text = store.name
         categoryLabel.text = store.category
         ratingLabel.text = store.rating
         if fetchFavoriteStores().map({ $0.id }).contains(id) {
-            favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+            self.favoriteButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }
+        else {
+            self.favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
         }
     }
     
@@ -193,6 +199,7 @@ class StoreTableViewCell: UITableViewCell {
                     try context.save()
                     
                     self.favoriteButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+                    self.delegate?.removeFavorite()
                 }
                 catch {
                     //TODO: - Show alert
@@ -205,6 +212,8 @@ class StoreTableViewCell: UITableViewCell {
                 favoriteStore.name = self.nameLabel.text
                 favoriteStore.category = self.categoryLabel.text
                 favoriteStore.rating = self.ratingLabel.text
+                favoriteStore.storeType = self.storeType
+                
                 
                 do {
                     try context.save()
