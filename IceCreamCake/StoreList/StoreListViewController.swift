@@ -20,9 +20,18 @@ class StoreListViewController: UIViewController {
     }()
     
     private lazy var favoritesToggleButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
-        button.tintColor = .darkGray
+        let button = UIButton(configuration: .tinted())
+        button.configuration?.background.backgroundColor = #colorLiteral(red: 1, green: 0, blue: 0, alpha: 0.8977200255)
+        button.configuration?.image = UIImage(systemName: "heart", withConfiguration: UIImage.SymbolConfiguration(pointSize: 14, weight: .semibold))
+        button.configuration?.imagePadding = 8
+        button.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+        button.configuration?.attributedTitle = AttributedString("Favoritos")
+        var container = AttributeContainer()
+        container.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        button.configuration?.attributedTitle?.mergeAttributes(container)
+        button.configuration?.background.cornerRadius = 8
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(goToFavorites), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -124,6 +133,12 @@ class StoreListViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            self?.storeListTableView.reloadData()
+        }
+    }
+    
     func shouldChangePageControlCurrentPage(to value: Int) {
         bannersPageControl.currentPage = value
     }
@@ -147,8 +162,8 @@ class StoreListViewController: UIViewController {
     
     private func setupFavoritesToggleButtonConstraints() {
         NSLayoutConstraint.activate([
-            favoritesToggleButton.heightAnchor.constraint(equalToConstant: 23),
-            favoritesToggleButton.widthAnchor.constraint(equalToConstant: 23)
+            favoritesToggleButton.heightAnchor.constraint(equalToConstant: 26),
+            favoritesToggleButton.widthAnchor.constraint(equalToConstant: 120)
         ])
     }
     
@@ -225,6 +240,11 @@ class StoreListViewController: UIViewController {
     @objc
     private func presentFilterModal() {
         viewModel.actions.presentFilterModal(delegate: self)
+    }
+    
+    @objc
+    private func goToFavorites() {
+        viewModel.goToFavorites()
     }
 }
 
