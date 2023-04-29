@@ -242,7 +242,6 @@ class StoreTableViewCell: UITableViewCell {
                 print("Error fetching favorite stores")
             }
         }
-        print(favoriteStores.map { $0.id })
         return favoriteStores
     }
 }
