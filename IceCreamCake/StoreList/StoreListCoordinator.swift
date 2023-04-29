@@ -55,9 +55,17 @@ final class StoreListCoordinator: Coordinator {
     }
     
     func goToFavorites(with favoriteStores: [FavoriteStore]) {
-        let favoritesViewModel = FavoriteStoresViewModel(favoriteStores: favoriteStores)
+        let favoritesViewModel = FavoriteStoresViewModel(favoriteStores: favoriteStores, coordinator: self)
         let favoritesViewController = FavoriteStoresViewController(viewModel: favoritesViewModel)
         
         rootViewController.pushViewController(favoritesViewController, animated: true)
+    }
+    
+    func goToStoreDetails(with store: Store) {
+        let storeDetailsService = StoreDetailsService()
+        let storeDetailsViewModel = StoreDetailsViewModel(store: store, service: storeDetailsService)
+        let storeDetailsViewController = StoreDetailsViewController(viewModel: storeDetailsViewModel)
+        
+        rootViewController.pushViewController(storeDetailsViewController, animated: true)
     }
 }

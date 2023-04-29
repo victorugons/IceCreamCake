@@ -1,7 +1,11 @@
 import UIKit
 
 extension FavoriteStoresViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let favoriteStore = viewModel.favoriteStores[indexPath.row]
+        let store = Store(id: Int(favoriteStore.id), name: favoriteStore.name ?? "", storeType: favoriteStore.storeType ?? [], category: favoriteStore.category ?? "", rating: favoriteStore.rating ?? "")
+        viewModel.goToStoreDetails(with: store)
+    }
 }
 
 extension FavoriteStoresViewController: UITableViewDataSource {

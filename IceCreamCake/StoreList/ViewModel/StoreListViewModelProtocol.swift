@@ -11,4 +11,5 @@ protocol StoreListViewModelProtocol {
     func getStoreType() -> String
     func search(for text: String)
     func goToFavorites()
+    func goToStoreDetails(with store: Store)
 }

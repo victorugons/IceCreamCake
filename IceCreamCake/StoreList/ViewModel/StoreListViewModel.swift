@@ -74,5 +74,8 @@ class StoreListViewModel: StoreListViewModelProtocol {
             print("Error fetching favorite stores")
         }
     }
+    
+    func goToStoreDetails(with store: Store) {
+        coordinator.goToStoreDetails(with: store)
+    }
 }
-

@@ -2,9 +2,11 @@ import UIKit
 
 class FavoriteStoresViewModel: FavoriteStoresViewModelProtocol {
     var favoriteStores: [FavoriteStore]
+    private let coordinator: StoreListCoordinator
     
-    init(favoriteStores: [FavoriteStore]) {
+    init(favoriteStores: [FavoriteStore], coordinator: StoreListCoordinator) {
         self.favoriteStores = favoriteStores
+        self.coordinator = coordinator
     }
     
     func updateFavorites() {
@@ -15,5 +17,9 @@ class FavoriteStoresViewModel: FavoriteStoresViewModelProtocol {
             //TODO: - Present alert
             print("Error fetching favorite stores")
         }
+    }
+    
+    func goToStoreDetails(with store: Store) {
+        coordinator.goToStoreDetails(with: store)
     }
 }
