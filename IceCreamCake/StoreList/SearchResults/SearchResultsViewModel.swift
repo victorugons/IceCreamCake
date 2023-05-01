@@ -26,4 +26,8 @@ class SearchResultsViewModel: SearchResultsViewModelProtocol {
         actions.storeList = searchResults
         completion()
     }
+    
+    func goToStoreDetails(with store: Store) {
+        coordinator.goToStoreDetails(with: store)
+    }
 }

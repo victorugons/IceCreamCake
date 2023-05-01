@@ -8,4 +8,5 @@ protocol SearchResultsViewModelProtocol {
     
     func getFirstSearchResults()
     func getSearchResults(for text: String, completion: @escaping () -> Void)
+    func goToStoreDetails(with: Store)
 }
