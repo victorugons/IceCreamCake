@@ -19,8 +19,4 @@ class StoreDetailsViewModel: StoreDetailsViewModelProtocol {
             }
         }
     }
-    
-    private func countProductsOfType(type: String) {
-        
-    }
 }
